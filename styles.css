@@ -1,82 +1,263 @@
+@font-face {
+  font-family: "Orbitron";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/orbitron/v29/yMJRMIlzdpvBhQQL_Qq7dy1biN15.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.15em;
+  --light-green-5: #f1f8e9;
+  --light-green-4: #dcedc8;
+  --light-green-1: #9ccc65;
+
+  --light-green-dark-4: #33691e;
+  --teal-darken-4:#004d40;
+  --blue-grey-5: #eceff1;
+  --blue-grey-4: #cfd8dc;
+  --blue-grey-1: #78909c;
+  --blue-grey-darken-1: #546e7a;
+  --blue-grey-darken-2: #455a64;
+  --blue-grey-darken-3: #37474f;
+  --blue-grey-darken-4: #263238;
+}
+
 body {
-  font-family: sans-serif;
-}
-
-.scene {
-  width: 200px;
-  height: 260px;
-  border: 1px solid #ccc;
-  margin: 40px 0;
-  perspective: 600px;
   position: relative;
 }
 
-.card {
-  width: 100%;
-  height: 50%;
-  transform-origin: bottom;
-  transition: transform 10s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-  position: relative;
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  margin: auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem auto;
 }
 
-.card.is-flipped {
-  transform: rotateX(-180deg);
+/* Flip Card Section */
+
+.flip-card {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 6rem;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 0.1rem;
 }
 
-.card__face {
+.top,
+.bottom,
+.flip-card .bottom-flip,
+.flip-card .top-flip {
+  height: 0.75em;
+  width: 100%;
+  line-height: 1em;
+  padding: 0.25em;
+  background-color: var(--light-green-5);
+  display: inline-flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.top,
+.flip-card .top-flip {
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bottom,
+.flip-card .bottom-flip {
+  display: flex;
+  align-items: flex-end;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.flip-card .top-flip {
   position: absolute;
   width: 100%;
-  height: 100%;
-  line-height: 260px;
-  color: black;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  
+  transform-origin: bottom;
+  transform-style: preserve-3d;
+}
+
+.top-flip-animate {
+  animation: flip-top 250ms ease-in;
+}
+
+@keyframes flip-top {
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+.flip-card .bottom-flip {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  
+  transform-origin: top;
+  transform-style: preserve-3d;
+  transform: rotateX(90deg);
+}
+
+.bottom-flip-animate {
+  animation: flip-bottom 250ms ease-out 250ms;
+}
+
+@keyframes flip-bottom {
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.timer, .dual-container {
+  height: 220px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.timer {
+  position: relative;
   display: flex;
   justify-content: center;
-  z-index: 1;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  border-radius: 12px;
 }
 
-.card__face--front {
-  background: red;
-}
-
-.card__face--back {
-  background: blue;
-  transform: rotateX(-180deg);
-  align-items: flex-end;
-}
-
-/* .scene::before {
+.main-title {
   position: absolute;
-  content: "back";
-  background-color: pink;
-  height: 100%;
-  width: 100%;
-  font-weight: bold;
-  font-size: 40px;
-  color: skyblue;
-  text-align: center;
-  line-height: 260px;
-} */
+  top: -5rem;
+}
+
+.icons {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 35px;
+  width: 35px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: var(--blue-grey-darken-4);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.clock {
+  display: flex;
+}
+
+.flip-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flip-clock > .text {
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+  text-transform: capitalize;
+}
+
+.flip-digit {
+  display: flex;
+}
+
+.digit-left {
+  margin-right: 1px;
+}
+
+.digit-right {
+  margin-left: 1px;
+}
+
+.colon {
+  margin: 10px;
+  padding-bottom: 9px;
+  font-weight: 700;
+}
+
+.timer.dark {
+  background-color: var(--blue-grey-darken-1);
+  color: var(--light-green-5);
+}
+
+.timer .icons.dark {
+  background-color: var(--light-green-5);
+  color: var(--blue-grey-darken-4);
+  border: 50%;;
+}
+
+.top.dark,
+.bottom.dark,
+.flip-card.dark .top-flip,
+.flip-card.dark .bottom-flip {
+  background-color:  var(--blue-grey-darken-4);
+}
+
+.top.dark,
+.flip-card.dark .top-flip {
+  border-bottom: 1px solid var(--light-green-5);
+}
 
 
-.scene::after {
-    position: absolute;
-    top: 0;
-    content: "front";
-    background-color: lightyellow;
-    height: 100%;
-    width: 100%;
-    font-weight: bold;
-    font-size: 40px;
-    color: skyblue;
-    text-align: center;
-    line-height: 260px;
-    z-index: -1;
-  }
+/* Break and Session Length Secion */
+
+.dual-container {
+  position: absolute;
+  top: -15rem;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dual-container .title {
+  padding-left: 2.4rem;
+}
+
+.time-sets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-sets h3 {
+  padding: 5px 5px 18px;
+}
+
+.time-sets .arrow {
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.time-sets .arrow .dark > .material-icons {
+  color: white;
+}
+
+.btns {
+  position: absolute;
+  top: 18rem;
+}
+
+.btns button {
+  margin: 5px;
+  border-radius: 5px;
+}
