@@ -16,22 +16,13 @@
   font-family: "Orbitron", sans-serif;
   font-size: 1.15em;
   --light-green-5: #f1f8e9;
-  --light-green-4: #dcedc8;
-  --light-green-1: #9ccc65;
-
-  --light-green-dark-4: #33691e;
-  --teal-darken-4:#004d40;
-  --blue-grey-5: #eceff1;
-  --blue-grey-4: #cfd8dc;
-  --blue-grey-1: #78909c;
   --blue-grey-darken-1: #546e7a;
-  --blue-grey-darken-2: #455a64;
-  --blue-grey-darken-3: #37474f;
   --blue-grey-darken-4: #263238;
 }
 
 body {
   position: relative;
+  background-color: #263238;
 }
 
 .container {
