@@ -145,7 +145,7 @@ function App() {
   function Length({ title, changeTime, type, time, formatTime }) {
     return (
       <div>
-        <h3 className="title" style={{ fontSize: "1.5rem" }}>
+        <h3 className={!isDark ? "title dark" : "title"} style={{ fontSize: "1.5rem" }}>
           {title}
         </h3>
         <div className="time-sets">
