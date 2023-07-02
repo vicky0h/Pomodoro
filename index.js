@@ -11,7 +11,7 @@ function App() {
   const [alertAudio, setAlertAudio] = React.useState(
     new Audio("./breakTime.wav")
   );
-
+  // TO PLAY SOUND WHEN TIME IS UP
   const playAlertSound = () => {
     alertAudio.currentTime = 0;
     alertAudio.play();
